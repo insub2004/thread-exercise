@@ -22,8 +22,7 @@ import com.nhnacademy.thread.Counter;
 public class App {
     public static void main(String[] args) {
         //TODO#5 - AlertDaemon Thread를 초기화하고 start() 메서드를 호출해서 실행 합니다.
-        AlertDaemon alertDaemon = new AlertDaemon();
-        alertDaemon.start();
+        AlertDaemon alertDaemon = null;
 
         Thread.currentThread().setName("my-thread");
         Counter counter = new Counter(10);
