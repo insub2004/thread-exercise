@@ -19,21 +19,30 @@ public class App
     public static void main( String[] args )
     {
         //TODO#1 CounterHandler 객체를 생성 합니다. countMaxSize : 10
-        CounterHandler counterHandler;
+        CounterHandler counterHandler = new CounterHandler(10);
 
         //TODO#2 threadA 생성시 counterHandler 객체를 paramter로 전달 합니다.
-        Thread threadA;
+        Thread threadA = new Thread(counterHandler);
 
         //TODO#3 threadA의 name을 'my-counter-A' 로 설정 합니다.
+        threadA.setName("my-counter-A");
 
         //TODO#4 threadB 생성시 counterHandler 객체를 paramter로 전달 합니다.
-        Thread threadB;
+        Thread threadB = new Thread(counterHandler);
 
         //TODO#5 threadB의 name을 'my-counter-B' 로 설정 합니다.
+        threadB.setName("my-counter-B");
 
         //TODO#7 threadA를 시작 합니다.
-
+        threadA.start();
         //TODO#8 threadB를 시작 합니다.
+        threadB.start();
 
+        /**
+         * counterHandler라는 객체는 heap메모리에 하나 있음(count의 값을 담고 있는 공간도 하나)
+         *
+         * 그런데 스레드A, 스레드B가 동시에 하나의 count값을 참조해서 값을 출력하고 증가시키기 때문에
+         * 생각했던 결과가 출력되지 않는다.
+         */
     }
 }
