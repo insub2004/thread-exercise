@@ -36,6 +36,7 @@ public class CounterHandler implements Runnable  {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
+                System.out.println("예외 발생!!");
                 throw new RuntimeException(e);
             }
             count++;
