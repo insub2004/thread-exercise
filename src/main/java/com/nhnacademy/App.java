@@ -26,6 +26,7 @@ public class App {
         alertDaemon.start();
 
         Thread.currentThread().setName("my-thread");
+
         Counter counter = new Counter(10);
         counter.run();
     }
