@@ -14,20 +14,26 @@ package com.nhnacademy.thread;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Duration;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 @Slf4j
 //TODO#1 CounterThread는 Thread를 상속 합니다.
-public class CounterThread {
+public class CounterThread extends Thread {
     private final long countMaxSize;
 
     private long count;
 
     public CounterThread(String name, long countMaxSize) {
         //TODO#2 name <-- null 이거나 공백 문자열이면 IllegalArgumentException이 발생 합니다.
-
+        if (Objects.isNull(name) || name.isBlank()) {
+            throw new IllegalArgumentException();
+        }
         //TODO#3 countMaxSize <=0 이면 IllegalArgumentException이 발생 합니다.
-
+        if (countMaxSize <= 0) {
+            throw new IllegalArgumentException();
+        }
 
         this.setName(name);
         this.countMaxSize = countMaxSize;
@@ -46,6 +52,13 @@ public class CounterThread {
          */
 
         do {
+            try {
+                Thread.sleep(Duration.ofSeconds(1));
+                count++;
+                log.info("name : {}, count : {}", this.getName(), count);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
         }while (count<countMaxSize);
     }
