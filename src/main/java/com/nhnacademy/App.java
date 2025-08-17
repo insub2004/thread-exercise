@@ -46,7 +46,7 @@ public class App
 
         //main thread가 실행 후 20초 후 threadA, threadB 종료될 수 있도록 interrupt 발생 시킵니다.
         try {
-            Thread.sleep(20000);
+            Thread.sleep(10000);
             threadA.interrupt();
             threadB.interrupt();
         } catch (InterruptedException e) {
