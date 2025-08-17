@@ -42,6 +42,7 @@ public class CounterHandler implements Runnable  {
 
         synchronized (monitor) {
             try {
+                log.debug("call monitor.wait()");
                 monitor.wait();
             } catch (InterruptedException e) {
                 throw new RuntimeException();
