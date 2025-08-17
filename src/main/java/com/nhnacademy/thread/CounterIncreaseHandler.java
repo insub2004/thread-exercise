@@ -36,7 +36,7 @@ public class CounterIncreaseHandler implements Runnable {
             try {
                 Thread.sleep(1000);
                 //sharedCounter의 count를 1증가 시키고 count값을 반환 합니다.
-                long count = sharedCounter.increaseAndGet();
+                long count = sharedCounter.decreaseAndGet();
                 log.debug("thread:{}, count:{}", Thread.currentThread().getName(), count);
             } catch (Exception e) {
                 log.debug("{} - interrupt!",Thread.currentThread().getName());
