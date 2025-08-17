@@ -16,6 +16,8 @@ import com.nhnacademy.count.SharedCounter;
 import com.nhnacademy.thread.CounterIncreaseHandler;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Duration;
+
 @Slf4j
 public class App 
 {
@@ -24,31 +26,40 @@ public class App
     {
 
         //TODO#1 shardCounter 객체를 0으로 초기화 합니다.
-        SharedCounter sharedCounter = null;
+        SharedCounter sharedCounter = new SharedCounter(0L);
 
         //TODO#2 counterIncreaseHandler 객체를 생성 합니다.
-        CounterIncreaseHandler counterIncreaseHandler = null;
+        CounterIncreaseHandler counterIncreaseHandler = new CounterIncreaseHandler(sharedCounter);
 
         //TODO#3 counterIncreaseHandler를 이용해서 threadA를 생성 합니다.
-        Thread threadA = null;
-
+        Thread threadA = new Thread(counterIncreaseHandler);
         //TODO#4 threadA의 thread name을 "thread-A"로 설정 합니다.
-
+        threadA.setName("thread-A");
         //TODO#5 threadA를 시작 합니다.
-
+        threadA.start();
 
         //TODO#6 counterIncreaseHandler를 이용해서 threadB를 생성 합니다.
-        Thread threadB = null;
+        Thread threadB = new Thread(counterIncreaseHandler);
 
         //TODO#7 threadB의 name을 'thread-B' 로 설정 합니다.
+        threadB.setName("thread-B");
 
         //TODO#8 threadB를 시작 합니다.
+        threadB.start();
 
         //TODO#9 main thread가 실행 후 20초 후 threadA, threadB 종료될 수 있도록 interrupt 발생 시킵니다.
-
+        try {
+            Thread.sleep(Duration.ofSeconds(20));
+            threadA.interrupt();
+            threadB.interrupt();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         //TODO#10 main Thread는 threadA와 threadB의 상태가 terminated가 될 때 까지 대기 합니다. 즉 threadA, threadB가 종료될 때 까지 대기(양보) 합니다.
-
+        while (threadA.isAlive() && threadB.isAlive()) {
+            Thread.yield();
+        }
 
         log.debug("System exit!");
     }
