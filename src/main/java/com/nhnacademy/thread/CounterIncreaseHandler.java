@@ -46,6 +46,7 @@ public class CounterIncreaseHandler implements Runnable {
                 log.debug("thread:{}, count:{}", Thread.currentThread().getName(), count);
 
                 //TODO#10 - A ~ E thread 중 먼저 실행하는 Thread가 무한 점유 합니다. 즉 다른 Thread는 increaseAndGet()를 실행 할 수 없습니다.
+                //TODO [insub] 여기 때문에 아마 무한 대기 지속됨
                 synchronized (this) {
                     while (true) {
                         log.debug("{} is working",Thread.currentThread().getName());
