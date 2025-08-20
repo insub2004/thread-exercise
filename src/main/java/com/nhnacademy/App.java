@@ -61,6 +61,17 @@ public class App {
 
         thread1.start();
         thread2.start();
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(thread1.getState());
+        System.out.println(thread2.getState());
+
+        // 둘 다 BLOCKED 가 나오겠지 -> 나옴
     }
 
 
