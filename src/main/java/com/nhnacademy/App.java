@@ -70,6 +70,7 @@ public class App {
         });
         thread3.setName("Thread-3");
 
+        //TODO [insub] th3(re2) 잠금 TIMED-WAITING -> th2(re1) 잠금그고 re2 탈취 시도 but Blocked -> th1은 re1탈취 시도 but Blocked...
         try {
             thread3.start();
             Thread.sleep(1000);
@@ -79,6 +80,10 @@ public class App {
         } catch (InterruptedException e) {
             log.debug(e.getMessage());
         }
+
+        System.out.println(thread3.getState());
+        System.out.println(thread2.getState());
+        System.out.println(thread1.getState());
     }
 
 }
