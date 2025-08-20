@@ -53,13 +53,13 @@ public class SharedCounter {
            1-2 처럼 semaphore를 이용해서 동기화할 수 있도록 구현 합니다.
         */
         try {
-            semaphore.acquire();
+            semaphore.acquire();        // 지정한 수를 넘어서 요청이 오면 -> AQS의 대기큐에 들어간 뒤 LockSupport.lock() // [head] -> [T2: SHARED, WAITING] → [T3: SHARED, WAITING] → tail
             count = count + 1;
             return count;
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } finally {
-            semaphore.release();
+            semaphore.release();       // permit 0 -> 1, AQS가 head 다음 노드를 unpark() -> 깨어난 스레드가 다시 acquire() 재시도 -> 성공시 새 head가 되고 진행
         }
     }
 
