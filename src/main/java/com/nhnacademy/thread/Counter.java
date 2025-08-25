@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Duration;
 
 @Slf4j
-public class Counter {
+public class Counter extends Thread {
     private final long countMaxSize;
     private long count;
 
@@ -26,7 +26,7 @@ public class Counter {
         if (countMaxSize < 0) {
             throw new IllegalArgumentException();
         }
-
+        this.setName("counter");
         //TODO#2 this.countMaxSize 초기화 합니다.
         this.countMaxSize = countMaxSize;
         //TODO#3 this.count 값을 0으로 초기화 합니다.
