@@ -12,6 +12,9 @@
 
 package com.nhnacademy.count;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class SharedCounter {
     private long count;
 
@@ -32,9 +35,11 @@ public class SharedCounter {
         return count;
     }
 
+    Object monitor1 = new Object();
+    Object monitor2 = new Object();
     public long increaseAndGet(){
         //TODO#1-3 block 단위로 lock을 걸고 count = count + 1 증가시키고 count를 반환 합니다.
-        synchronized (this) {
+        synchronized (monitor1) {
             count = count + 1;
             return count;
         }
@@ -42,8 +47,10 @@ public class SharedCounter {
 
     public long decreaseAndGet(){
         //TODO#1-4 count = count -1  부분 lock을 걸고, count를 반환 합니다.
-        synchronized (this) {
+        synchronized (monitor2) {
             count = count - 1;
+            System.out.println("dd");
+            log.debug("dd");
             return count;
         }
     }
