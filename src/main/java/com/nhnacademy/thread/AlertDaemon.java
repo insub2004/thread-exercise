@@ -18,6 +18,7 @@ public class AlertDaemon extends Thread {
         // 예기치 않은 종료 상황에서도 안전한 종료를 보장합니다.
         Runtime.getRuntime().addShutdownHook(
                 new Thread(() -> {
+                    setDaemon(true);
                     //TODO#3 AlertDaemon Thread가 종료 시점에 적절한 메시지를 출력합니다.
                     System.out.println("프로그램 종료 직전에 실행!!");
                 })

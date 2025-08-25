@@ -29,5 +29,12 @@ public class App {
 
         Counter counter = new Counter(10);
         counter.run();
+
+        try {
+            Thread.sleep(3000);
+            Thread.currentThread().interrupt();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
