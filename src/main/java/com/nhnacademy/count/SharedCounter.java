@@ -44,7 +44,7 @@ public class SharedCounter {
         //TODO#1-4 count = count -1  부분 lock을 걸고, count를 반환 합니다.
         synchronized (this) {
             count = count - 1;
+            return count;
         }
-        return count;
     }
 }
